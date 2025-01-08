@@ -3,8 +3,8 @@ from django.http import HttpResponse
 from rest_framework.viewsets import ModelViewSet
 # Create your views here.
 
-from .models import Animal, Breed, Type, Staff
-from .serializers import AnimalSerializer, BreedSerializer, TypeSerializer, StaffSerializer
+from .models import Animal, Breed, Type, Staff, Event, Task
+from .serializers import AnimalSerializer, BreedSerializer, TypeSerializer, StaffSerializer, EventSerializer, TaskSerializer
 
 class AnimalViewSet(ModelViewSet):
     queryset = Animal.objects.all()
@@ -24,3 +24,13 @@ class StaffViewSet(ModelViewSet):
 
 def home(request):
     return HttpResponse('Welcome to the Animal  API')
+
+class EventViewSet(ModelViewSet):
+    queryset = Event.objects.all()
+    serializer_class = EventSerializer
+
+class TaskViewSet(ModelViewSet):
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
+
+

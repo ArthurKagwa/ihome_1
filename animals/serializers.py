@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Animal, Breed, Type, Staff
+from .models import Animal, Breed, Type, Staff, Event, Task
 
 class TypeSerializer(serializers.ModelSerializer):
     class Meta:
@@ -19,5 +19,15 @@ class AnimalSerializer(serializers.ModelSerializer):
 class StaffSerializer(serializers.ModelSerializer):
     class Meta:
         model = Staff
+        fields = '__all__'
+
+class EventSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Event
+        fields = '__all__'
+
+class TaskSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Task
         fields = '__all__'
 
