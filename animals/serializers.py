@@ -31,3 +31,7 @@ class TaskSerializer(serializers.ModelSerializer):
         model = Task
         fields = '__all__'
 
+class RegisterSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = '__all__'

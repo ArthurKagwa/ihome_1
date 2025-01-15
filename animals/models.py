@@ -34,6 +34,8 @@ class Animal(models.Model):
     mother = models.ForeignKey('Animal', on_delete=models.SET_NULL, null=True, related_name='animal_mother')
     father = models.ForeignKey('Animal', on_delete=models.SET_NULL, null=True, related_name='animal_father')
     dob = models.DateField()
+    sex = models.CharField(max_length=1, choices=[('M','M'),('F','F')], default='M')
+    births = models.IntegerField(null=True)
 
     def __str__(self):
         return "id: " + self.id + " type: " + self.type.name + " breed: " + self.breed.breed_name + " dob: " + str(self.dob)
