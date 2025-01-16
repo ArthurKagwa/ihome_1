@@ -2,7 +2,7 @@ from django.urls import path, include
 from rest_framework import routers
 
 from .auth_views import MyTokenObtainPairView, MyTokenRefreshView
-from .views import AnimalViewSet, BreedViewSet, TypeViewSet, StaffViewSet, EventViewSet, TaskViewSet
+from .views import AnimalViewSet, BreedViewSet, TypeViewSet, StaffViewSet, EventViewSet, TaskViewSet, RegisterUser
 
 router = routers.DefaultRouter()
 router.register('animals', AnimalViewSet)
@@ -16,4 +16,5 @@ urlpatterns = [
     path('api/', include(router.urls)),  # Include the router's URLs
     path('api/token/', MyTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', MyTokenRefreshView.as_view(), name='token_refresh'),
+    path('register/', RegisterUser.as_view(), name='register'),
 ]

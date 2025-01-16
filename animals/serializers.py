@@ -1,5 +1,9 @@
+from django.contrib.auth import authenticate
 from rest_framework import serializers
-from .models import Animal, Breed, Type, Staff, Event, Task
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+
+from .models import Animal, Breed, Type, Staff, Event, Task, AbstractUser, Farm
+
 
 class TypeSerializer(serializers.ModelSerializer):
     class Meta:
@@ -31,7 +35,25 @@ class TaskSerializer(serializers.ModelSerializer):
         model = Task
         fields = '__all__'
 
-class RegisterSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User
+        model = AbstractUser
         fields = '__all__'
+class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
+    username_field = 'username'
+
+    def validate(self, attrs):
+        credentials = {
+            self.username_field: attrs[self.username_field],
+            'password': attrs['password']
+        }
+
+        user = authenticate(**credentials)
+
+        if user is None:
+            raise serializers.ValidationError('Invalid credentials')
+
+        if not user.is_active:
+            raise serializers.ValidationError('User is inactive')
+
+        return super().validate(attrs)
